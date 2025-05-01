@@ -10,7 +10,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // MongoDB Atlas connection string from .env file
-const uri = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/feedbackDB';
+// Replace 'mongodb://localhost:27017/feedbackDB' with your actual MongoDB connection string if not using .env
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
