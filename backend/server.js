@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,8 +9,8 @@ const feedbackRoutes = require('./routes/feedback');
 const app = express();
 const port = process.env.PORT || 5000;
 
-// MongoDB Atlas connection string
-const uri = "mongodb+srv://rsrsp21:nVxSMVQYWfQefOET@cluster0.hd1uz5i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// MongoDB Atlas connection string from .env file
+const uri = process.env.MONGO_URI;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
