@@ -1,116 +1,162 @@
-# Feedback System
+# User Feedback System
 
-A full-stack feedback management application built with **React (frontend)** and **Express + MongoDB (backend)**.
+A full-stack web application for collecting, storing, and reviewing user feedback.
 
----
+The app lets users submit feedback through a form, and provides a dashboard where submitted feedback can be viewed and filtered by name, email, category, and date range.
 
-## 📁 Project Structure
+## Features
 
+- Submit feedback with name, email, category, and message
+- Categorize feedback as suggestion, bug report, or feature request
+- Store feedback in MongoDB
+- View all submitted feedback in a dashboard
+- Filter feedback by user name, email, category, start date, and end date
+- Separate frontend and backend applications
+
+## Tech Stack
+
+### Frontend
+
+- React
+- Axios
+- React Icons
+- CSS utility classes
+
+### Backend
+
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- CORS
+- dotenv
+
+## Project Structure
+
+```text
+user-feedback-system/
+|-- backend/
+|   |-- models/
+|   |   `-- feedback.js
+|   |-- routes/
+|   |   `-- feedback.js
+|   |-- package.json
+|   `-- server.js
+|-- frontend/
+|   |-- public/
+|   |-- src/
+|   |   |-- components/
+|   |   |   |-- FeedbackDashboard.js
+|   |   |   |-- FeedbackForm.js
+|   |   |   `-- Sidebar.js
+|   |   |-- App.js
+|   |   `-- index.js
+|   `-- package.json
+|-- package.json
+`-- README.md
 ```
-feedback-system/
-├── backend/
-│   ├── models/
-│   ├── routes/
-│   ├── .env
-│   └── server.js
-├── frontend/
-│   ├── public/
-│   └── src/
-├── package.json (root)
-```
 
----
+## Prerequisites
 
-## ⚙️ Prerequisites
+- Node.js
+- npm
+- MongoDB connection string, either from MongoDB Atlas or a local MongoDB instance
 
-- Node.js and npm installed
-- MongoDB Atlas URI (placed in `.env`)
+## Environment Variables
 
----
+Create a `.env` file inside the `backend/` folder:
 
-## 🛠️ Environment Setup
-
-Create a `.env` file in the root or in the `backend/` folder (whichever your server is reading) with:
-
-```
+```env
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
 ```
 
----
+If `MONGO_URI` is not provided, the backend falls back to:
 
-## 🧹 Install Dependencies
-
-### 🔹 Option 1: Install frontend and backend separately
-
-```bash
-# Install frontend dependencies
-cd frontend
-npm install
-
-# Install backend dependencies
-cd backend
-npm install
+```text
+mongodb://localhost:27017/feedbackDB
 ```
 
-### 🔸 Option 2: Install everything from root
+## Installation
+
+Install frontend and backend dependencies from the root folder:
 
 ```bash
 npm run install
 ```
 
-> This uses the `concurrently` package to install both frontend and backend.
+You can also install them separately:
 
----
+```bash
+cd frontend
+npm install
+```
 
-## 🚀 Running the App
+```bash
+cd backend
+npm install
+```
 
-### 🔹 To run backend only
+## Running the Application
+
+Start both the frontend and backend from the root folder:
+
+```bash
+npm start
+```
+
+Or run each app separately:
 
 ```bash
 cd backend
 node server.js
 ```
 
-### 🔹 To run frontend only
-
 ```bash
 cd frontend
 npm start
 ```
 
-### 🔸 To run both frontend and backend together
-
-```bash
-npm run start
-```
-
-> The root-level `start` script uses `concurrently` to launch both.
-
----
-
-## 🌐 Accessing the App
+## Local URLs
 
 - Frontend: `http://localhost:3000`
-- Backend API: `http://localhost:5000/feedback`
+- Backend feedback API: `http://localhost:5000/feedback`
 
----
+## API Endpoints
 
-## 📦 Scripts Summary
+### Create Feedback
 
-| Command               | Description                       |
-|-----------------------|-----------------------------------|
-| `npm run install`     | Installs frontend & backend       |
-| `npm start`           | Starts both frontend & backend    |
-| `npm run build`       | Builds the React frontend         |
+```http
+POST /feedback
+```
 
----
+Request body:
 
-## 📄 License
+```json
+{
+  "userName": "Jane Doe",
+  "email": "jane@example.com",
+  "feedbackText": "The dashboard is easy to use.",
+  "category": "suggestion"
+}
+```
 
-MIT
+### Get Feedback
 
----
+```http
+GET /feedback
+```
 
-> Made with ❤️ by Sri Ram
+Returns all feedback records stored in MongoDB.
 
+## Available Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run install` | Installs frontend and backend dependencies |
+| `npm start` | Starts frontend and backend together |
+| `npm run build` | Builds the React frontend |
+
+## License
+
+This project is licensed under the MIT License.
